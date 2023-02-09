@@ -15,6 +15,7 @@ repositories {
 
 dependencies {
     implementation(project(":effectiveinjection"))
+    kapt(project(":effectiveinjection-processor"))
     testImplementation(kotlin("test"))
 }
 
