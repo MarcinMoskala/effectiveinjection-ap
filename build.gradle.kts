@@ -1,9 +1,9 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.7.20"
+    kotlin("jvm") version "1.7.22"
     application
-    kotlin("kapt") version "1.8.10"
+    id("com.google.devtools.ksp") version "1.7.22-1.0.8"
 }
 
 group = "org.example"
@@ -15,7 +15,7 @@ repositories {
 
 dependencies {
     implementation(project(":effectiveinjection"))
-    kapt(project(":effectiveinjection-processor"))
+    ksp(project(":effectiveinjection-processor"))
     testImplementation(kotlin("test"))
 }
 
@@ -29,4 +29,10 @@ tasks.withType<KotlinCompile> {
 
 application {
     mainClass.set("MainKt")
+}
+
+kotlin.sourceSets.main {
+    kotlin.srcDirs(
+        file("$buildDir/generated/ksp/main/kotlin"),
+    )
 }
